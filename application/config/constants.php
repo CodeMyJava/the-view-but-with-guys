@@ -85,6 +85,8 @@ defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automat
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 defined('PATHOFTASKS')         OR define('PATHOFTASKS', APPPATH . '../data/tasks.csv');
 
+defined('PATHOFTASKSXML')         OR define('PATHOFTASKSXML', APPPATH . '../data/tasks.xml');
+
 //creating the constants for the 2 roles.
 defined('ROLE_GUEST') OR define('ROLE_GUEST', 'Guest');
 defined('ROLE_OWNER') OR define('ROLE_OWNER', 'Owner');
