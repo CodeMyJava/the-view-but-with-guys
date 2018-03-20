@@ -1,11 +1,39 @@
 <?php
 
-class Tasks extends CSV_Model {
-    private $test;
+class Tasks extends XML_Model {
+private $test;
+
 public function __construct()
+{
+  parent::__construct(PATHOFTASKSXML, 'id');
+}
+
+public function load()
+{
+  $tasks = simplexml_load_file(PATHOFTASKSXML);
+
+  echo $tasks->task->id;
+  if (simplexml_load_file(PATHOFTASKSXML) !== FALSE)
   {
-    parent::__construct(PATHOFTASKS, 'id');
+    foreach ($tasks as $task) {
+      $record = new stdClass();
+      $record->id = (int) $task['id'];
+      $record->task = (string) $task->desc;
+      $record->priority = (int) $task->priority;
+      $record->size = (int) $task->size;
+      $record->group = (int) $task->group;
+      $record->deadline = (string) $task->deadline;
+      $record->status = (string) $task->status;
+      $record->flag = (int) $task->flag;
+
+      $this->_data[$record->id] = $record;
+    }
   }
+
+  // rebuild the keys table
+  $this->reindex();
+}
+
   function getCategorizedTasks()
 {
     // extract the undone tasks
